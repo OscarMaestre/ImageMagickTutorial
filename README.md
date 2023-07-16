@@ -19,7 +19,7 @@ En realidad ``convert`` puede hacer muchas cosas más, como por ejemplo dibujar 
 
 * Un tamaño de la imagen que se va a generar. Esto se hace con el parámetro ``-size anchoxalto`` .
 * Un color de fondo de la imagen. Se usa el parámetro ``xc:<color>``. 
-* Un conjunto de operaciones.
+* Un conjunto de operaciones. Se usa el parámetro ``-draw '<operaciones>' `` (Cuidado, en Windows se debe usar la comilla doble en lugar de la simple) 
 
 Así, por ejemplo podemos construir una imagen llamada ``dibujo1.png`` usando esto::
 
@@ -28,3 +28,29 @@ Así, por ejemplo podemos construir una imagen llamada ``dibujo1.png`` usando es
 Y obtenemos esto:
 
 ![Imagen generada por convert](imagenes/dibujo1.png)
+
+### Operaciones de dibujo
+Se pueden usar estas primitivas:
+
+* ``line x0,y0, x1,y1``.
+* ``rectangle x0,y0, x1,y1``.
+* ``text <x,y> 'Texto``
+
+Delante de cada primitiva se puede poner el parámetro ``-fill <color>`` para indicar el color con el que se van a rellenar
+
+Aquí tenemos un ejemplo que dibuja todo::
+
+    convert -size 320x200 -fill red -draw 'line 0,0,320,200' -fill white -draw 'rectangle 0,0,320,200' xc:white imagenes/todo01.png
+
+Esto devuelve esta imagen:
+
+![Imagen mal generada](imagenes/todo01.png)
+
+Como puede verse *no se ve la línea roja.* Esto se debe a que la linea se dibujó primero y despues se puso encima el rectángulo. Hagámoslo de otra manera::
+
+
+    convert -size 320x200 -fill white -draw 'rectangle 0,0,320,200' -fill red -draw 'line 0,0,320,200'  xc:white imagenes/todo02.png
+
+Que ahora da esto:
+
+![Imagen correcta](imagenes/todo02.png)
