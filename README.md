@@ -54,3 +54,11 @@ Como puede verse *no se ve la línea roja.* Esto se debe a que la linea se dibuj
 Que ahora da esto:
 
 ![Imagen correcta](imagenes/todo02.png)
+
+Añadamos además un poco de texto (observar el uso de las comillas dobles en el texto)::
+
+    convert -size 320x200 -fill white -draw 'rectangle 0,0,320,200' -fill red -draw 'line 0,0,320,200'  -pointsize 16 -draw 'text 160,100 'Hola' ' xc:white imagenes/todo03.png
+
+Que ahora da esto:
+
+![Imagen correcta](imagenes/todo03.png)
